@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import MetricsChart from "../../component/MetricsChart/MetricsChart";
 import MetricsTable from "../../component/MetricsTable/MetricsTable";
 import TypeButton from "../../component/TypeButton/TypeButton";
 import { data } from "../../data/data";
@@ -8,6 +9,7 @@ const Home = () => {
     const [metrics, setMetrics] = useState<IMetric[]>([])
     const [metricsTypes, setMetricsTypes] = useState<string[]>([])
     const [selectedMetricType, setSelectedMetricType] = useState<string>("")
+    const [selectedMetricRow, setSelectedMetricRow] = useState<string>("")
 
     const filteredMetrics: IMetric[] = useMemo(() => {
         if (selectedMetricType === 'all') {
@@ -34,7 +36,8 @@ const Home = () => {
                         setSelectedMetricType={setSelectedMetricType} />
                 )}
             </BtnsContainer>
-            <MetricsTable metrics={filteredMetrics} />
+            <MetricsTable metrics={filteredMetrics} selectedMetricRow={selectedMetricRow} />
+            <MetricsChart metrics={filteredMetrics} selectedType={selectedMetricType} setSelectedMetricRow={setSelectedMetricRow} />
         </div>
     );
 };

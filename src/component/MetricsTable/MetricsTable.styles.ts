@@ -9,8 +9,9 @@ export const Table = styled.table`
     max-width: 900px;
 `
 
-export const TBodyTr = styled.tr`
+export const TBodyTr = styled.tr<{$mouseRow: boolean}>`
     transition: 0.2s background;
+    background: ${({$mouseRow}) => $mouseRow ? '#f0f0f0' : ''};
     &:hover {
         background: #f0f0f0;
     }

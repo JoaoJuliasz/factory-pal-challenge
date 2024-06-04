@@ -2,9 +2,10 @@ import { Table, TableTd, TableTh, TBodyTr } from "./MetricsTable.styles";
 
 type Props = {
     metrics: IMetric[]
+    selectedMetricRow: string
 }
 
-const MetricsTable = ({ metrics }: Props) => {
+const MetricsTable = ({ metrics, selectedMetricRow }: Props) => {
     return (
         <Table>
             <thead>
@@ -17,7 +18,7 @@ const MetricsTable = ({ metrics }: Props) => {
             </thead>
             <tbody>
                 {metrics.map((metric, index) => (
-                    <TBodyTr key={metric.id}>
+                    <TBodyTr key={metric.id} $mouseRow={selectedMetricRow === metric.id}>
                         <TableTd $lastItem={index < metrics.length - 1}>{metric.label}</TableTd>
                         <TableTd $lastItem={index < metrics.length - 1}>{metric.value}</TableTd>
                         <TableTd $lastItem={index < metrics.length - 1}>{metric.category}</TableTd>

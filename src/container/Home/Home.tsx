@@ -30,10 +30,11 @@ const Home = () => {
         <div>
             <BtnsContainer>
                 {metricsTypes.map(type =>
-                    <TypeButton title={type} selectedType={selectedMetricType}
+                    <TypeButton key={type} title={type} selectedType={selectedMetricType}
                         setSelectedMetricType={setSelectedMetricType} />
                 )}
             </BtnsContainer>
+            <MetricsTable metrics={filteredMetrics} />
         </div>
     );
 };

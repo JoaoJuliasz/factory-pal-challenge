@@ -11,7 +11,7 @@ const TypeButton = ({ title, selectedType, setSelectedMetricType }: Props) => {
 
     const handleClick = () => {
         if (selectedType !== title) {
-            setSelectedMetricType(prev => title)
+            setSelectedMetricType(() => title)
         }
     }
 

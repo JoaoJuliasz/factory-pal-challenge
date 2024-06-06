@@ -7,6 +7,7 @@ export const Table = styled.table`
     text-align: left;
     min-width: 860px;
     max-width: 900px;
+    width: 900px;
     margin: 0 auto;
 `
 

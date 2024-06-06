@@ -3,7 +3,7 @@ import MetricsChart from "../../component/MetricsChart/MetricsChart";
 import MetricsTable from "../../component/MetricsTable/MetricsTable";
 import TypeButton from "../../component/TypeButton/TypeButton";
 import { data } from "../../data/data";
-import { BtnsContainer } from "./Home.styles";
+import { BtnsContainer, Container } from "./Home.styles";
 
 const Home = () => {
     const [metrics, setMetrics] = useState<IMetric[]>([])
@@ -29,16 +29,16 @@ const Home = () => {
     if (metrics.length === 0) return <div>Loading...</div>
 
     return (
-        <div>
+        <Container>
             <BtnsContainer>
                 {metricsTypes.map(type =>
                     <TypeButton key={type} title={type} selectedType={selectedMetricType}
                         setSelectedMetricType={setSelectedMetricType} />
                 )}
             </BtnsContainer>
-            <MetricsTable metrics={filteredMetrics} selectedMetricRow={selectedMetricRow} />
             <MetricsChart metrics={filteredMetrics} selectedType={selectedMetricType} setSelectedMetricRow={setSelectedMetricRow} />
-        </div>
+            <MetricsTable metrics={filteredMetrics} selectedMetricRow={selectedMetricRow} />
+        </Container>
     );
 };
 

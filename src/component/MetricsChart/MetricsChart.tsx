@@ -1,8 +1,8 @@
 
 import { Dispatch, SetStateAction } from 'react';
-import { BarChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { BarChart, Tooltip, XAxis, YAxis, BarProps } from 'recharts';
 import { useDataConversion } from '../../hook/useDataConversion/useDataConversion';
-import { ChartResponseContainer, ChartTitle, ChartWrapper, Container } from './MetricsChart.styles';
+import { ChartResponseContainer, ChartTitle, ChartWrapper, Container, } from './MetricsChart.styles';
 import { renderPercentageBar, renderRestDataBar } from './renderMethods';
 
 type Props = {
@@ -17,8 +17,8 @@ const MetricsChart = ({ metrics, selectedType, setSelectedMetricRow }: Props) =>
 
     const data = splitDataIntoGroups(metrics, selectedType)
 
-    const handleMouseOver = (e: any) => {
-        const row: string = e.id
+    const handleMouseEnter: BarProps["onMouseEnter"] = (e) => {
+        const row: string = e.payload.id
         setSelectedMetricRow(() => row)
     }
 
@@ -45,8 +45,8 @@ const MetricsChart = ({ metrics, selectedType, setSelectedMetricRow }: Props) =>
                                     />
 
                                     {data.length === 1 ? <XAxis dataKey="label" /> : null}
-                                    {renderRestDataBar(restData, valuesIdx, handleMouseOver, handleMouseLeave)}
-                                    {renderPercentageBar(percentageData, valuesIdx, handleMouseOver, handleMouseLeave)}
+                                    {renderRestDataBar(restData, valuesIdx, handleMouseEnter, handleMouseLeave)}
+                                    {renderPercentageBar(percentageData, valuesIdx, handleMouseEnter, handleMouseLeave)}
                                 </BarChart>
                             </ChartResponseContainer>
                         </ChartWrapper>

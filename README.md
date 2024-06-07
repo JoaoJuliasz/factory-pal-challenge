@@ -31,7 +31,7 @@ To start the development server, run the following command:
 npm run dev
 ```
 
-This will launch the project in development mode, and you can view it in your browser at http://localhost:5173.
+This will launch the project in development mode, and you can view it in your browser at http://localhost:3000.
 
 ## Run Unit Tests
 
@@ -44,3 +44,15 @@ npm run test
 ```
 
 This will execute the test suite and display the results in the terminal.
+
+## Run E2E
+
+The project uses Cypress for e2e testing.
+
+To run the e2e tests for the project, use the following command:
+
+```bash
+npx cypress open
+```
+
+and follow the instructions.

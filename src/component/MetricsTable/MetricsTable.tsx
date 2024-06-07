@@ -19,7 +19,7 @@ const MetricsTable = ({ metrics, selectedMetricRow }: Props) => {
                 </Thead>
                 <tbody>
                     {metrics.map((metric, index) => (
-                        <TBodyTr key={metric.id} $mouseRow={selectedMetricRow === metric.id}>
+                        <TBodyTr key={metric.id} $mouseRow={selectedMetricRow === metric.id} id={`tr-${metric.id}`}>
                             <TableTd $lastItem={index < metrics.length - 1}>{metric.label}</TableTd>
                             <TableTd $lastItem={index < metrics.length - 1}>{metric.value}</TableTd>
                             <TableTd $lastItem={index < metrics.length - 1}>{metric.category}</TableTd>

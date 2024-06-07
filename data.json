@@ -1,6 +1,14 @@
 {
     "data": [
         {
+            "id": "oee",
+            "label": "oee",
+            "value": 0.68,
+            "type": "percentage",
+            "description": "The overall equipment efficiency in %",
+            "category": "efficiency"
+        },
+        {
             "id": "sl",
             "label": "Speed loss",
             "value": -10.5,

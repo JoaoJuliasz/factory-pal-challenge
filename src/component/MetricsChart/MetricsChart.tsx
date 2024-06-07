@@ -1,8 +1,9 @@
 
 import { Dispatch, SetStateAction } from 'react';
-import { Bar, BarChart, Tooltip, XAxis, YAxis, Cell } from 'recharts';
-import { useDataConvertion } from '../../hook/useDataConvertion/useDataConvertion';
+import { BarChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { useDataConversion } from '../../hook/useDataConversion/useDataConversion';
 import { ChartResponseContainer, ChartTitle, ChartWrapper, Container } from './MetricsChart.styles';
+import { renderPercentageBar, renderRestDataBar } from './renderMethods';
 
 type Props = {
     metrics: IMetric[]
@@ -12,43 +13,43 @@ type Props = {
 
 const MetricsChart = ({ metrics, selectedType, setSelectedMetricRow }: Props) => {
 
-    const { splitDataIntoGroups } = useDataConvertion()
+    const { splitDataIntoGroups, splitPercentageData } = useDataConversion()
 
     const data = splitDataIntoGroups(metrics, selectedType)
 
     const handleMouseOver = (e: any) => {
-        const row: string = e.target.id
+        const row: string = e.id
         setSelectedMetricRow(() => row)
     }
+
+    const handleMouseLeave = () => setSelectedMetricRow(() => "")
 
     return (
         <Container>
             {
-                data.map((values) =>
-                    <ChartWrapper>
-                        <ChartTitle>{values[0].category}</ChartTitle>
-                        <ChartResponseContainer width="100%" height={200} $size={data.length}>
-                            <BarChart data={values}>
-                                <YAxis />
-                                <Tooltip label="label" />
-                                {data.length === 1 ? <XAxis dataKey="label" /> : null}
-                                <Bar dataKey="value" activeBar={false}
-                                    unit={values[0].type === 'secs' ? " (s)" : ""}
-                                    background={{ fill: '#fff' }} barSize={50}
-                                >
-                                    {values.map((_, index) => (
-                                        <Cell key={`cell-${index}`} fill="#8884d8" data-testid={`cell-${index}`} 
-                                            onMouseEnter={handleMouseOver}
-                                            onMouseLeave={() => setSelectedMetricRow(() => "")} />
-                                    ))
-                                    }
-                                </Bar>
-                            </BarChart>
-                        </ChartResponseContainer>
-                    </ChartWrapper>
+                data.map((values, valuesIdx) => {
+                    const { percentageData, restData } = splitPercentageData(values)
+                    console.warn({percentageData, restData})
+                    return (
+                        <ChartWrapper key={`chart-wrapper-${valuesIdx}`}>
+                            <ChartTitle>{values[0].category}</ChartTitle>
+                            <ChartResponseContainer width="100%" height={150} $size={data.length}>
+                                <BarChart data={[...restData, ...percentageData]}>
+                                    <YAxis orientation='left' yAxisId={0} dataKey="total" />
+                                    {percentageData.length > 0 ? <YAxis orientation="right" yAxisId={1} domain={[0, 100]} dataKey="pct" tickFormatter={(value: number) => `${value}%`} />
+                                        : null}
+                                    <Tooltip label="label" />
+                                    {data.length === 1 ? <XAxis dataKey="label" /> : null}
+                                    {renderRestDataBar(restData, valuesIdx, handleMouseOver, handleMouseLeave)}
+                                    {renderPercentageBar(percentageData, valuesIdx, handleMouseOver, handleMouseLeave)}
+                                </BarChart>
+                            </ChartResponseContainer>
+                        </ChartWrapper>
+                    )
+                }
                 )
             }
-        </Container>
+        </Container >
     );
 };
 

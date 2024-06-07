@@ -22,6 +22,5 @@ export const ChartTitle = styled.h3`
 `
 
 export const ChartResponseContainer = styled(ResponsiveContainer) <{ $size: number }>`
-    ${({ $size }) => $size === 1 && 'margin: 0 auto;'}
-    max-width: ${({ $size }) => 750 / $size}px 
+    ${({ $size }) => $size === 1 && 'margin: 0 auto; max-width: 750px;'}
 `

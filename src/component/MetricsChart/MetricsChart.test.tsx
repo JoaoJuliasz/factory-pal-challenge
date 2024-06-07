@@ -91,7 +91,7 @@ describe('MetricsChart', () => {
         ]
         const mockFn = jest.fn()
         render(<MetricsChart metrics={mockMetrics} selectedType="mock" setSelectedMetricRow={mockFn} />)
-        const bar = screen.queryByTestId('cell-0')
+        const bar = screen.queryByTestId('cell-0-0')
         if (bar) {
             fireEvent.mouseEnter(bar)
             expect(mockFn).toHaveBeenCalledTimes(1)

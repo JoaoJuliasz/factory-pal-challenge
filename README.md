@@ -1,30 +1,46 @@
-# React + TypeScript + Vite
+# Factory Pal Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies
 
-Currently, two official plugins are available:
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+### Clone the Repository
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+First, you need to clone the repository to your local machine. You can do this using the following command:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+git clone https://github.com/JoaoJuliasz/factory-pal-challenge.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Install Dependencies
+
+Navigate to the project directory and install the dependencies using npm:
+
+```bash
+cd factory-pal-challenge
+npm install
+```
+## Run the Project
+
+To start the development server, run the following command:
+
+```bash
+npm run dev
+```
+
+This will launch the project in development mode, and you can view it in your browser at http://localhost:5173.
+
+## Run Unit Tests
+
+The project uses React Testing Library and Jest for unit testing.
+
+To run the tests for the project, use the following command:
+
+```bash
+npm run test
+```
+
+This will execute the test suite and display the results in the terminal.

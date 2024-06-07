@@ -1,6 +1,6 @@
 import { useCallback } from "react"
 
-export const useDataConvertion = () => {
+export const useDataConversion = () => {
 
     //When selectedType is all, should group values by type
     const splitDataIntoGroups = useCallback((metrics: IMetric[], selectedType: string) => {
@@ -25,5 +25,11 @@ export const useDataConvertion = () => {
         })
     }, [])
 
-    return { splitDataIntoGroups }
+    const splitPercentageData = useCallback((values: IMetric[]): { percentageData: IMetric[], restData: IMetric[] } => {
+        const percentageData = values.filter(item => item.type === 'percentage').map(item => ({ ...item, pct: item.value * 100 }))
+        const restData = values.filter(item => item.type !== 'percentage').map(item => ({ ...item, total: item.value }))
+        return { percentageData, restData }
+    }, [])
+
+    return { splitDataIntoGroups, splitPercentageData }
 };

@@ -128,4 +128,15 @@ describe('useDataConversion', () => {
         expect(percentageData[0].pct).toEqual(0.55 * 100)
         expect(restData[0].total).toEqual(150)
     })
+
+    it('should return "(s)", once type is secs', () => {
+        const { result } = renderHook(() => useDataConversion());
+        const value = result.current.unitLabelConverter('secs')
+        expect(value).toEqual('(s)')
+    })
+    it('should return "", once type is not mapped', () => {
+        const { result } = renderHook(() => useDataConversion());
+        const value = result.current.unitLabelConverter('number')
+        expect(value).toEqual('')
+    })
 });

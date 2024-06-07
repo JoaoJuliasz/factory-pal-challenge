@@ -31,5 +31,14 @@ export const useDataConversion = () => {
         return { percentageData, restData }
     }, [])
 
-    return { splitDataIntoGroups, splitPercentageData }
+    const unitLabelConverter = useCallback((type: string) => {
+        const types: { [key: string]: string } = {
+            'secs': '(s)',
+            'percentage': '%',
+            'hours': '(h)'
+        }
+        return types[type] ?? ''
+    }, [])
+
+    return { splitDataIntoGroups, splitPercentageData, unitLabelConverter }
 };

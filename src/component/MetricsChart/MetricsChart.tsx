@@ -13,7 +13,7 @@ type Props = {
 
 const MetricsChart = ({ metrics, selectedType, setSelectedMetricRow }: Props) => {
 
-    const { splitDataIntoGroups, splitPercentageData } = useDataConversion()
+    const { splitDataIntoGroups, splitPercentageData, unitLabelConverter } = useDataConversion()
 
     const data = splitDataIntoGroups(metrics, selectedType)
 
@@ -29,16 +29,21 @@ const MetricsChart = ({ metrics, selectedType, setSelectedMetricRow }: Props) =>
             {
                 data.map((values, valuesIdx) => {
                     const { percentageData, restData } = splitPercentageData(values)
-                    console.warn({percentageData, restData})
                     return (
-                        <ChartWrapper key={`chart-wrapper-${valuesIdx}`}>
+                        <ChartWrapper key={`chart-wrapper-${valuesIdx}`} $space={valuesIdx < data.length - 1}>
                             <ChartTitle>{values[0].category}</ChartTitle>
                             <ChartResponseContainer width="100%" height={150} $size={data.length}>
                                 <BarChart data={[...restData, ...percentageData]}>
-                                    <YAxis orientation='left' yAxisId={0} dataKey="total" />
-                                    {percentageData.length > 0 ? <YAxis orientation="right" yAxisId={1} domain={[0, 100]} dataKey="pct" tickFormatter={(value: number) => `${value}%`} />
+                                    <YAxis orientation='left' yAxisId={0} dataKey="total" style={{ fontSize: '14px' }} />
+                                    {percentageData.length > 0 ?
+                                        <YAxis orientation="right" yAxisId={1} domain={[0, 100]} dataKey="pct"
+                                            tickFormatter={(value: number) => `${value}%`} style={{ fontSize: '14px' }} />
                                         : null}
-                                    <Tooltip label="label" />
+                                    <Tooltip
+                                        labelFormatter={(_, props) => props?.at(0)?.payload.label}
+                                        formatter={(value, _, props) => [`${value} ${unitLabelConverter(props?.payload.type)}`]}
+                                    />
+
                                     {data.length === 1 ? <XAxis dataKey="label" /> : null}
                                     {renderRestDataBar(restData, valuesIdx, handleMouseOver, handleMouseLeave)}
                                     {renderPercentageBar(percentageData, valuesIdx, handleMouseOver, handleMouseLeave)}

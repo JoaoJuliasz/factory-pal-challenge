@@ -33,12 +33,12 @@ export const TableTh = styled.th`
     border-bottom: 1px solid #d7d7d7;
     padding: 8px 12px;
     font-weight: normal;
-    color: #7b7979a6;
+    color: #212226ba;
     font-size: 14px;
 `
 
 export const TableTd = styled.td<{ $lastItem: boolean }>`
-    color: #323232ba;
+    color: #525462ba;
     margin: 8px;
     padding: 8px 12px;
     border-bottom: ${({ $lastItem }) => $lastItem ? '1px solid #d7d7d7' : 'unset'};

@@ -8,17 +8,20 @@ export const Container = styled.div`
     justify-content: space-around;
 `
 
-export const ChartWrapper = styled.div`
+export const ChartWrapper = styled.div<{$space: boolean}>`
     display: flex;
     flex-direction: column;
     width: 100%;
     flex: 1;
-    margin: 6px 0;
+    ${({ $space }) => $space && 'margin-right: 6px;'}
+    box-shadow: rgb(219, 210, 219) 0px 0px 10px 0px;
+    border-radius: 4px;
 `
 
 export const ChartTitle = styled.h3`
     text-transform: capitalize;
     font-weight: normal;
+    color: #212226ba;
 `
 
 export const ChartResponseContainer = styled(ResponsiveContainer) <{ $size: number }>`

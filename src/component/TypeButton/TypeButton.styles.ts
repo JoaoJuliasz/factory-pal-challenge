@@ -11,6 +11,7 @@ export const Button = styled.a<{ $selected: boolean }> `
     margin-right: 6px;
     border-color: ${({ $selected }) => $selected ? '#3d3d3d' : '#ccc'};
     text-transform: capitalize;
+    color: #212226ba;
 
     &:hover {
         border-color: #3d3d3d;

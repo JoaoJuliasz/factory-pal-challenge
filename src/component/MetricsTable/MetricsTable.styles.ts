@@ -1,19 +1,29 @@
 import { styled } from "styled-components";
 
-export const Table = styled.table`
-    border-collapse: collapse;
+export const Container = styled.div`
+    max-height: 400px;
+    overflow-y: auto;
+    max-width: 950px;
     box-shadow: rgb(219, 210, 219) 0px 0px 10px 0px;
     border-radius: 4px;
-    text-align: left;
-    min-width: 860px;
-    max-width: 900px;
-    width: 900px;
     margin: 0 auto;
 `
 
-export const TBodyTr = styled.tr<{$mouseRow: boolean}>`
+export const Table = styled.table`
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+`
+
+export const Thead = styled.thead`
+    position: sticky; 
+    top: 0;
+    background: #fff;
+`
+
+export const TBodyTr = styled.tr<{ $mouseRow: boolean }>`
     transition: 0.2s background;
-    background: ${({$mouseRow}) => $mouseRow ? '#f0f0f0' : ''};
+    background: ${({ $mouseRow }) => $mouseRow ? '#f0f0f0' : ''};
     &:hover {
         background: #f0f0f0;
     }

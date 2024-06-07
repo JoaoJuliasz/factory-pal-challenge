@@ -18,7 +18,6 @@ export const useDataConvertion = () => {
 
     const convertHourIntoSeconds = useCallback((metrics: IMetric[]): IMetric[] => {
         return metrics.map((item) => {
-            //TODO: check this validation, because the convertion should happen both ways
             if (item.type === 'hours') {
                 return { ...item, value: item.value * 3600, type: 'secs' }
             }

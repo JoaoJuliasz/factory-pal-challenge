@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import MetricsChart from "../../component/MetricsChart/MetricsChart";
 import MetricsTable from "../../component/MetricsTable/MetricsTable";
 import TypeButton from "../../component/TypeButton/TypeButton";
-import { data } from "../../data/data";
 import { BtnsContainer, Container } from "./Home.styles";
 
 const Home = () => {
@@ -19,11 +18,16 @@ const Home = () => {
     }, [metrics, selectedMetricType])
 
     useEffect(() => {
-        const types = new Set(data.map(value => value.category))
-        const typesArr = Array.from(types)
-        setMetrics(data)
-        setMetricsTypes([...typesArr, "all"])
-        setSelectedMetricType(typesArr[0])
+        fetch('/data.json')
+            .then(response => response.json())
+            .then(({ data }: { data: IMetric[] }) => {
+                const types = new Set(data.map(value => value.category))
+                const typesArr = Array.from(types)
+                setMetrics(data)
+                setMetricsTypes([...typesArr, "all"])
+                setSelectedMetricType(typesArr[0])
+            })
+            .catch(error => console.error('Error fetching data:', error));
     }, [])
 
     if (metrics.length === 0) return <div>Loading...</div>

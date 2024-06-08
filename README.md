@@ -49,6 +49,12 @@ This will execute the test suite and display the results in the terminal.
 
 The project uses Cypress for e2e testing.
 
+First, the project need to be running, so use: 
+
+```bash
+npm run dev
+```
+
 To run the e2e tests for the project, use the following command:
 
 ```bash

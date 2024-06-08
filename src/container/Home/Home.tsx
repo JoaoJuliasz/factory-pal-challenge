@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import MetricsChart from "../../component/MetricsChart/MetricsChart";
 import MetricsTable from "../../component/MetricsTable/MetricsTable";
 import TypeButton from "../../component/TypeButton/TypeButton";
@@ -17,7 +17,7 @@ const Home = () => {
         return metrics.filter(metric => metric.category === selectedMetricType)
     }, [metrics, selectedMetricType])
 
-    useEffect(() => {
+    const fetchMetricsData = () => useCallback(() => {
         fetch('/data.json')
             .then(response => response.json())
             .then(({ data }: { data: IMetric[] }) => {
@@ -28,6 +28,10 @@ const Home = () => {
                 setSelectedMetricType(typesArr[0])
             })
             .catch(error => console.error('Error fetching data:', error));
+    }, [])
+
+    useEffect(() => {
+        fetchMetricsData()
     }, [])
 
     if (metrics.length === 0) return <div>Loading...</div>
